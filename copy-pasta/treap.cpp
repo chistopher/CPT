@@ -132,9 +132,6 @@ treap<V>* lower_bound(treap<V>* t, V x) {
     return split(t, x - 1).second; //NOTE: THEN LEFT MOST
 }
 
-
-
-/*
 //NOTE: PERSISTENT TREAP
 template<typename V>
 treap<V>* mergep(treap<V>* a, treap<V>* b) {
@@ -143,12 +140,12 @@ treap<V>* mergep(treap<V>* a, treap<V>* b) {
     if(b == nullptr)
         return a;
     if(a->y < b->y) {
-        auto t = new treap<V>(a);
+        auto t = new treap<V>(*a);
         t->right = mergep(a->right, b);
         update(t); //NOTE: MOD SIZE
         return t;
     } else {
-        auto t = new treap<V>(b);
+        auto t = new treap<V>(*b);
         t->left = mergep(a, b->left);
         update(t); //NOTE: MOD SIZE
         return t;
@@ -161,18 +158,18 @@ std::pair<treap<V>*, treap<V>*> splitp(treap<V>* t, V x) {
     if(t == nullptr)
         return {nullptr, nullptr};
     if(t->x <= x) {
-        auto a = new treap<V>(t);
-        auto p = split(a->right, x);
+        auto a = new treap<V>(*t);
+        auto p = splitp(a->right, x);
         a->right = p.first;
         update(a); //NOTE: MOD SIZE
         p.first = a;
         return p;
     } else {
-        auto a = new treap<V>(t);
-        auto p = split(a->left, x);
+        auto a = new treap<V>(*t);
+        auto p = splitp(a->left, x);
         a->left = p.second;
         update(a); //NOTE: MOD SIZE
         p.second = a;
         return p;
     }
-}*/
+}

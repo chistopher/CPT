@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/c++,macos,cmake,clion,windows,visualstudio
 
+# codeforces training
+training/
+
 ### C++ ###
 # Prerequisites
 *.d

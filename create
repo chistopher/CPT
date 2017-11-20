@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd `dirname $0`
+
 cp -r templateTask $1
 
 echo "add_subdirectory($1)" >> CMakeLists.txt

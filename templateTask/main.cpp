@@ -19,6 +19,7 @@ int main(int argc, char* argv[])
     //content
 
 
+    cout.flush();
     return 0;
 }
 

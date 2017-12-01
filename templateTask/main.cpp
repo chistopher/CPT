@@ -2,7 +2,9 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+//#include <bits/stdc++.h>
 
+#define rep(a, b) for(int a = 0; a < (b); ++a)
 
 using namespace std;
 

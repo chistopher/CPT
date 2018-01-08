@@ -15,7 +15,7 @@ struct treap {
     int y; //heap key, secondary
     treap* left = nullptr;
     treap* right = nullptr;
-    size_t size = 0;
+    size_t size = 1;
     //V minimum; // OR OTHER STATISTICS
     //MASS MODIFICATION FLAGS THAT CAN BE PASSED DOWN THE TREE ON UPDATE
     // MAYBE PASS MODIFICATION DOWN ON SEARCH
@@ -76,13 +76,13 @@ template<typename V>
 std::pair<treap<V>*, treap<V>*> split_size(treap<V>* t, size_t x) {
     if(t == nullptr) return {nullptr, nullptr};
     if(1 + size(t->left) <= x) {
-        auto p = split(t->right, x - 1 - size(t->left));
+        auto p = split_size(t->right, x - 1 - size(t->left));
         t->right = p.first;
         update(t); //NOTE: MOD SIZE
         p.first = t;
         return p;
     } else {
-        auto p = split(t->left, x);
+        auto p = split_size(t->left, x);
         t->left = p.second;
         update(t); //NOTE: MOD SIZE
         p.second = t;

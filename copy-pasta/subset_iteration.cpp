@@ -10,9 +10,9 @@ void iterate_k_subsets(vector<T>& data, int k, function<void(vector<T*>&)> lambd
     do
     {
         subset.clear();
-        for(int i=0; i<inside.size(), ++i)
+        for(int i=0; i<inside.size(); ++i)
             if(inside[i])
-                subset.push_back[&data[i]];
+                subset.push_back(&data[i]);
         lambda(subset);
     }
     while(prev_permutation(inside.begin(), inside.end()));

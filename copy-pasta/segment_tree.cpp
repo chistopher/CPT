@@ -1,11 +1,6 @@
 
-#include <bits/stdc++.h>
-using namespace std;
-
-struct SegmentTree
-{
-    explicit SegmentTree(vector<int>& arr)
-    {
+struct SegmentTree {
+    explicit SegmentTree(vector<int>& arr) {
         m_n = arr.size();
         m_tree.resize(2*m_n, 0);
         // construct base values
@@ -31,4 +26,3 @@ struct SegmentTree
     int m_n;
     vector<int> m_tree;
 };
-

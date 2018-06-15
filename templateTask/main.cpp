@@ -7,7 +7,7 @@
 #define rep(a, b)   for(int a = 0; a < (b); ++a)
 #define debug(x)    clog << #x << " = " << x << endl;
 #define all(a)      (a).begin(),(a).end()
-#define endl '\n'
+#define endl        '\n'
 
 using namespace std;
 

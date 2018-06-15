@@ -7,13 +7,11 @@ void iterate_k_subsets(vector<T>& data, int k, function<void(vector<T*>&)> lambd
     fill(inside.begin(), inside.begin()+k, true);
     auto subset = vector<T*>;
     subset.reserve(k);
-    do
-    {
+    do {
         subset.clear();
         for(int i=0; i<inside.size(); ++i)
             if(inside[i])
                 subset.push_back(&data[i]);
         lambda(subset);
-    }
-    while(prev_permutation(inside.begin(), inside.end()));
+    } while(prev_permutation(inside.begin(), inside.end()));
 }

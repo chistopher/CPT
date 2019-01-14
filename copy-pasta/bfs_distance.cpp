@@ -6,7 +6,7 @@ vector<int> bfs_distance(Graph& neighbors, int source) {
     auto dist = vector<int>(neighbors.size(), -1);
     queue<int> Q;
 
-    dist[source] = source;
+    dist[source] = 0;
     Q.push(source);
 
     while(!Q.empty()) {

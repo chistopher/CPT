@@ -32,3 +32,21 @@ long long discreteLogarithm(long long a, long long b, long long m) {
     }
     return -1;
 }
+
+
+// iterating prime factorization of b
+auto b = 999999;
+for (long long i=2; i*i<=b; i++) {
+    int prime_exponent = 0;
+    while (b % i == 0) {
+        prime_exponent++;
+        b /= i;
+    }
+    if (prime_exponent == 0) continue;
+
+    // at this point we know that i is a prime
+    // and have its exponent in b's factorization
+}
+if (b!=1) [
+        // b holds a single large prime bigger than sqrt of original b
+}

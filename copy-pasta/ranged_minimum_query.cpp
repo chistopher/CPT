@@ -1,24 +1,32 @@
 
-constexpr int ilog(unsigned int i) {
-    return 31 - __builtin_clz(i); // integer logarithm
-}
+auto ilog = [](uint32_t i) { return 31 - __builtin_clz(i); };
+using T = long long;
+int n = 10;
+auto arr = vector<T>(n);
 
-const auto N = 5000; // pls insert max value for n
-const auto LOGN = ilog(N);
+auto rmq = vector<vector<T>>(ilog(n)+1, vector<T>(n)); // rmq[k][i] stores min of interval [i, i+2^k)
+// the interval [i, i+2^k) splits nicely into two sub-intervals [i, i+2^{k-1}) and [i+2^{k-1}, i+2^k)
+rmq[0] = arr; // init bottom level
+for (int k = 1; k <= ilog(n); k++)
+    for (int i = 0; i + (1 << k) <= n; i++)
+        rmq[k][i] = min(rmq[k-1][i], rmq[k-1][i + (1 << (k-1))]);
+auto query = [&rmq, &ilog](int l, int r) { // exclusive query
+    auto log = ilog(r-l);
+    return min(rmq[log][l], rmq[log][r - (1 << log)]);
+};
 
-long long rmq[N][LOGN+1]; // rmq[i][j] stores min of interval [i, i+2^j)
-void buildRMQ(vector<long long>& arr) {
-    auto n = arr.size();
-    for(int i=0; i<n; ++i) rmq[i][0] = arr[i];
-    // compute rmq array via DP
-    // the interval [i, i+2^k) splits nicely into two sub-intervals [i, i+2^{k-1}) and [i+2^{k-1}, i+2^k)
+
+// RMQ query object generator
+auto createRMQ = [](int n, auto init, auto combine) { // returns an exclusive query lambda
+    using T = decltype(init(0));
+    auto ilog = [](uint32_t i) { return 31 - __builtin_clz(i); };
+    auto rmq = vector<vector<T>>(ilog(n)+1, vector<T>(n)); // rmq[k][i] stores min of interval [i, i+2^k)
+    for (int i = 0; i < n; ++i) rmq[0][i] = init(i); // init bottom level
     for (int k = 1; k <= ilog(n); k++)
         for (int i = 0; i + (1 << k) <= n; i++)
-            rmq[i][k] = max(rmq[i][k-1], rmq[i + (1 << (k-1))][k-1]);
-}
-
-long long query(int l, int r) {
-    int log = ilog(r-l);
-    return max(rmq[l][log], rmq[r - (1 << log)][log]);
-}
-
+            rmq[k][i] = combine(rmq[k-1][i], rmq[k-1][i + (1 << (k-1))]);
+    return [rmq=move(rmq), ilog, combine](int l, int r) mutable { // mutable s.t. combine can take non-const args
+        auto log = ilog(r-l);
+        return combine(rmq[log][l], rmq[log][r - (1 << log)]);
+    };
+};

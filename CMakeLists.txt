@@ -19,4 +19,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     endif()
 endif()
 
-add_subdirectory(source)
+if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/source")
+    add_subdirectory(source)
+endif()

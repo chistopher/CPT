@@ -1,11 +1,11 @@
 #!/bin/bash
 
+if [[ $# -eq 0 ]] ; then
+    echo 'no argument'
+    exit 0
+fi
+
 cd `dirname $0`
+cp .template.cpp source/$1.cpp
+echo "add_executable($1 $1.cpp)" >> source/CMakeLists.txt
 
-cp -r templateTask $1
-
-mv $1/main.cpp $1/$1.cpp
-
-sed -i 's/main/'"$1"'/g' $1/CMakeLists.txt
-
-echo "add_subdirectory($1)" >> CMakeLists.txt

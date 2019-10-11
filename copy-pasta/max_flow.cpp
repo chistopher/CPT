@@ -1,67 +1,74 @@
 
-struct Edge {
-    Edge* twin = nullptr;
-    int to;
-    unsigned short flow = 0;
-    unsigned short capacity = 0;
-    bool isResidual = false;
-    Edge(int to_) : to{to_} {}
+struct edge {
+    int from, to;
+    int flow, cap;
+    edge* twin;
 };
-using Graph = vector<vector<Edge*>>;
+vector<vector<edge*>> adj;
 
-void createEdge(Graph& graph, int from, int to, unsigned short capacity) {
-    auto edge = new Edge(to);
-    edge->capacity = capacity;
-    graph[from].push_back(edge);
-    auto resEdge = new Edge(from);
-    resEdge->isResidual = true;
-    edge->twin = resEdge;
-    resEdge->twin = edge;
-    graph[to].push_back(resEdge);
-}
+auto* e1 = new edge{a, b, 0, c, nullptr};
+auto* e2 = new edge{b, a, 0, c, nullptr};
+e1->twin = e2;
+e2->twin = e1;
+adj[a].push_back(e1);
+adj[b].push_back(e2);
 
-vector<Edge*> bfs_with_path(Graph& graph, int source, int target){
-    auto n = graph.size();
-    auto visited = vector<bool>(n, false);
-    auto prev = vector<Edge*>(n, nullptr);
-    queue<int> Q;
-    Q.push(source);
-    visited[source] = true;
-    while(!Q.empty()) {
-        auto current = Q.front(); Q.pop();
-        for(auto edge : graph[current]) {
-            if(!visited[edge->to] && edge->capacity != edge->flow) {
-                Q.push(edge->to);
-                prev[edge->to] = edge;
-                visited[edge->to] = true;
-                if(edge->to == target)
-                    return prev; // break!!!
+// Ford Fulkerson
+int flow = 0;
+while (true) {
+    vector<edge*> inc(n, nullptr);
+    queue<int> q{{s}};
+    while (!q.empty()) {
+        auto v = q.front(); q.pop();
+        for (auto e : adj[v])
+            if (!inc[e->to] && e->flow < e->cap) {
+                q.push(e->to);
+                inc[e->to] = e;
             }
-        }
     }
-    return prev;
+    if (!inc[t]) break;
+    int aug = 1e9;
+    for (int v = t; v != s; v = inc[v]->from)
+        aug = min(aug, inc[v]->cap - inc[v]->flow);
+    flow += aug;
+    for (int v = t; v != s; v = inc[v]->from) {
+        inc[v]->flow += aug;
+        inc[v]->twin->flow -= aug;
+    }
 }
 
-// find augmenting path; augment and update graph; return how much was augmented
-int augmentingPath(Graph& graph, int source, int target) {
-    auto prev = bfs_with_path(graph, source, target);
-    vector<Edge*> path;
-    int pathCapacity = INT_MAX;
-    Edge* edge = prev[target];
-    if(edge == nullptr) // target not reachable
-        return 0;
-    while(edge != nullptr) {
-        path.push_back(edge);
-        pathCapacity = min(pathCapacity, edge->capacity - edge->flow);
-        edge = prev[edge->twin->to];
+// Dinic's
+int dfs(int v, int aug, vector<int>& dist, vector<int>& next) {
+    if (v == t) return aug;
+    for (int& i = next[v]; i<adj[v].size(); ++i) {
+        auto e = adj[v][i];
+        if (e->flow == e->cap) continue;
+        if (dist[e->to] != dist[v] + 1) continue;
+        int pushed = dfs(e->to, min(aug, e->cap - e->flow), dist, next);
+        if (pushed == 0) continue;
+        e->flow += pushed;
+        e->twin->flow -= pushed;
+        return pushed;
     }
-    //augment path by pathcapacity
-    for(auto edge : path) {
-        edge->flow += pathCapacity;
-        if(edge->isResidual)
-            edge->twin->flow -= pathCapacity;
-        else
-            edge->twin->capacity = edge->flow;
-    }
-    return pathCapacity;
+    return 0;
 }
+
+int flow = 0;
+while(true) {
+    vector<int> dist(n, INF);
+    dist[s] = 0;
+    queue<int> q{{s}};
+    while (!q.empty()) {
+        auto v = q.front(); q.pop();
+        for (auto e : adj[v])
+            if (dist[e->to] == INF && e->flow < e->cap) {
+                q.push(e->to);
+                dist[e->to] = dist[v] + 1;
+            }
+    }
+    if (dist[t]==INF) break;
+    vector<int> next(n,0);
+    int aug;
+    while (aug = dfs(s,INF,dist,next)) flow += aug;
+}
+

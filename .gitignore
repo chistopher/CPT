@@ -2,7 +2,7 @@
 # Created by https://www.gitignore.io/api/c++,macos,cmake,clion,windows,visualstudio
 
 # own code
-source/
+CPcode/
 
 # clion builds
 cmake-build-*

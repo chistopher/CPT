@@ -7,6 +7,9 @@ CPcode/
 # clion builds
 cmake-build-*
 
+# vscode
+.vscode
+
 ### C++ ###
 # Prerequisites
 *.d

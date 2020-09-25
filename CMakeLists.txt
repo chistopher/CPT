@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 set (CMAKE_CXX_STANDARD 17)
 
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    add_compile_options(-Wall -Wextra -Wshadow -Wfloat-equal -Wconversion)
+    add_compile_options(-Wall -Wextra -Wshadow -Wfloat-equal)
     if (CMAKE_BUILD_TYPE STREQUAL "Debug")
         add_compile_options(
                 -fsanitize=address,undefined

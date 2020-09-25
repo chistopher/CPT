@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.140.1/containers/cpp
 {
-	"name": "C++",
+	"name": "C++ CompProg",
 	"build": {
 		"dockerfile": "Dockerfile",
 	},
@@ -15,7 +15,12 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-vscode.cpptools-extension-pack"
-	]
+	],
+
+	"containerEnv": {
+		"ASAN_OPTIONS": "abort_on_error=1:detect_leaks=0",
+		"UBSAN_OPTIONS": "abort_on_error=1"
+	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

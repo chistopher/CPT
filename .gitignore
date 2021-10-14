@@ -1,11 +1,12 @@
 
-# Created by https://www.gitignore.io/api/c++,macos,cmake,clion,windows,visualstudio
-
 # own code
 CPcode/
 
 # clion builds
 cmake-build-*
+
+
+# Created by https://www.gitignore.io/api/c++,macos,cmake,clion,windows,visualstudio
 
 ### C++ ###
 # Prerequisites

@@ -14,6 +14,9 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         -fsanitize=address,undefined
         -fno-omit-frame-pointer
         -fno-sanitize-recover=all
+        # debug mode of STL
+        # -D_GLIBCXX_DEBUG # set debug macro for libstdc++ (gcc std lib)
+        # -D_LIBCPP_DEBUG # set debug macro for libc++ (clang std lib)
     )
     add_link_options(
             -fsanitize=address,undefined

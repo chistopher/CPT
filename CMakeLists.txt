@@ -19,8 +19,8 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         # -D_LIBCPP_DEBUG # set debug macro for libc++ (clang std lib)
     )
     add_link_options(
-            -fsanitize=address,undefined
-            -fno-omit-frame-pointer
+        -fsanitize=address,undefined
+        -fno-omit-frame-pointer
     )
 endif()
 

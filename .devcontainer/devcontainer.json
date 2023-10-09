@@ -1,0 +1,14 @@
+{
+	"name": "C++ CompProg",
+	"image": "mcr.microsoft.com/devcontainers/cpp",
+    "customizations": { "vscode": { "extensions": [
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cmake-tools",
+                "ms-vsliveshare.vsliveshare"
+    ]}},
+    "containerEnv": {
+        "ASAN_OPTIONS": "abort_on_error=1:detect_leaks=0",
+        "UBSAN_OPTIONS": "abort_on_error=1"
+    }
+}

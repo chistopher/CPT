@@ -9,6 +9,12 @@
     ]}},
     "containerEnv": {
         "ASAN_OPTIONS": "abort_on_error=1:detect_leaks=0",
-        "UBSAN_OPTIONS": "abort_on_error=1"
-    }
+        "UBSAN_OPTIONS": "abort_on_error=1",
+		"HOME": "/home/vscode"
+    },
+	"remoteEnv": {
+		"HOME": "/home/vscode"
+	},
+    "containerUser": "vscode",
+    "runArgs": [ "--userns=keep-id" ]
 }

@@ -16,5 +16,4 @@
 		"HOME": "/home/vscode"
 	},
     "containerUser": "vscode",
-    "runArgs": [ "--userns=keep-id" ]
 }

@@ -38,6 +38,7 @@ If you do not want to use the devcontainer, I recommend a [WSL and Clion](https:
 ### MacOS
 
 Same as Linux. Optionally install GCC to use the `bits` header or just use the devcontainer.
+If you want to use podman instead of docker, then dismiss the promt to install docker and change the `Docker Path` setting of the dev containers extension from `docker` to `podman`.
 
 ## Sanitizers
 

@@ -1,12 +1,13 @@
 
-#ifndef __clang__
+#if defined(__GNUC__) && !defined(__clang__)
 #include <bits/stdc++.h>
+#else
+#include <iostream>
+#include <vector>
 #endif
 
-#include <iostream>
-
 #define rep(a, b)   for(int a = 0; a < (b); ++a)
-#define all(a)      (a).begin(),(a).end()
+#define all(a)      begin(a),end(a)
 #define endl        '\n'
 
 using namespace std;
@@ -24,4 +25,3 @@ int main() {
 
     return 0;
 }
-

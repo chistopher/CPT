@@ -1,10 +1,7 @@
 
-#if defined(__GNUC__) && !defined(__clang__)
-#include <bits/stdc++.h>
-#else
+// #include <bits/stdc++.h> // includes all; gcc only
 #include <iostream>
 #include <vector>
-#endif
 
 #define rep(a, b)   for(int a = 0; a < (b); ++a)
 #define all(a)      begin(a),end(a)

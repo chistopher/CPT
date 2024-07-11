@@ -1,5 +1,9 @@
 
+#ifndef __clang__
 #include <bits/stdc++.h>
+#endif
+
+#include <iostream>
 
 #define rep(a, b)   for(int a = 0; a < (b); ++a)
 #define all(a)      (a).begin(),(a).end()

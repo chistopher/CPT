@@ -19,6 +19,10 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_link_options(
         -fsanitize=address,undefined
         -fno-omit-frame-pointer
+        # to fix GCC ASAN with certain linux kernel versions
+        # unfortunately the current devcontainer needs this
+        # see: https://github.com/google/sanitizers/issues/856
+        -no-pie
     )
 endif()
 

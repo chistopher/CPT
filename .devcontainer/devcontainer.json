@@ -1,5 +1,6 @@
 {
 	"name": "C++ CompProg",
+	// see: https://github.com/devcontainers/images/tree/main/src/cpp
 	"image": "mcr.microsoft.com/devcontainers/cpp",
     "customizations": { "vscode": { "extensions": [
 				"ms-vscode.cpptools",

@@ -3,42 +3,39 @@ competitive programming template
 
 ## Usage
 
-TL;DR: implement your main in `source/example.cpp`.
+Write your code in `main.cpp`.
+Once you get a problem accepted you can reset the file with `git restore main.cpp`.
+I suggest to depend on the judging systems to keep your code. 
+You can also copy the file somewhere for backup before you reset it.
 
-To create a new executable, copy `.template.cpp` to the source folder and add the line 
-``add_executable([name] [name].cpp)`` to `source/CMakeLists.txt`.
-There is a bash script that does these two steps, e.g., `./create [name]`.
-Or write all your code in `source/example.cpp`, reset the file when done and depend on the judging systems to keep your code :)
+## Setup 1: CLion
 
-## Setup
+Works out-of-the-box on Linux because you have GCC already installed.
+On Windows, I recommend a [WSL and Clion](https://www.jetbrains.com/help/clion/how-to-use-wsl-development-environment-in-product.html) setup.
+On macOS you need a compiler. Try `xcode-select --install` for clang or `brew install gcc` for GCC.
 
-Most modern IDEs should have CMake support.
-Just open this folder in your IDE.
-You need to have a compiler installed and it should be GCC, because that's what most juding systems use.
-When using clang the `<bits/stdc++.h>` header does not work.
-
-### VSCode + Docker
+## Setup 2: VSCode + Docker
 
 You can open this repo inside a [devcontainer in VSCode](https://code.visualstudio.com/docs/devcontainers/containers).
 It has all the settings and compiler already installed and ready to go.
 This just needs Docker and VSCode with the Dev Containers Extension.
-
-Works on all operating systems!
-
-
-### Linux
-
-You have GCC installed already.
-Use CLion, VSCode, or the devcontainer.
-
-### Windows
-
-If you do not want to use the devcontainer, I recommend a [WSL and Clion](https://www.jetbrains.com/help/clion/how-to-use-wsl-development-environment-in-product.html) setup.
-
-### MacOS
-
-Same as Linux. Optionally install GCC to use the `bits` header or just use the devcontainer.
 If you want to use podman instead of docker, then dismiss the promt to install docker and change the `Docker Path` setting of the dev containers extension from `docker` to `podman`.
+
+Works on all operating systems and even in the browser via GitHub codespaces!
+
+## Setup 3: Anything else
+
+Most modern IDEs should have CMake support.
+Just open this folder in your IDE.
+You need to have a compiler installed.
+
+## Notes
+
+- GCC on macOS does not support sanitizers
+- on ARM `long double` is just 64 bit
+- the `<bits/stdc++.h>` header is GCC only
+- prefer GCC (except on mac), because that's what most juding systems use
+
 
 ## Sanitizers
 

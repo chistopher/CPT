@@ -4,16 +4,15 @@
     "customizations": { "vscode": { "extensions": [
 				"ms-vscode.cpptools",
 				"ms-vscode.cpptools-extension-pack",
-				"ms-vscode.cmake-tools",
-                "ms-vsliveshare.vsliveshare"
+				"ms-vscode.cmake-tools"
     ]}},
     "containerEnv": {
-        "ASAN_OPTIONS": "abort_on_error=1:detect_leaks=0",
-        "UBSAN_OPTIONS": "abort_on_error=1",
+		"ASAN_OPTIONS": "abort_on_error=1:detect_leaks=0",
+		"UBSAN_OPTIONS": "abort_on_error=1",
 		"HOME": "/home/vscode"
     },
 	"remoteEnv": {
 		"HOME": "/home/vscode"
 	},
-    "containerUser": "vscode",
+    "containerUser": "vscode"
 }

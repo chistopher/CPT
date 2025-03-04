@@ -5,10 +5,8 @@
 
 #define rep(a, b)   for(int a = 0; a < (b); ++a)
 #define all(a)      begin(a),end(a)
-#define endl        '\n'
 
 using namespace std;
-using Graph = vector<vector<int>>;
 using ll = long long;
 
 int main() {
@@ -16,9 +14,7 @@ int main() {
     cin.tie(nullptr);
     cout.precision(10);
 
-
-    //content
-
+    // content
 
     return 0;
 }

@@ -1,12 +1,13 @@
-# CMake version
-cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 project(CPT)
-set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD 20)
 
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(
         # warnings
         -Wall -Wextra -Wshadow -Wfloat-equal -Wconversion
+        -Wno-sign-conversion # we often compare int to size_t
+        -Wvla # warn for variable length arrays
         # sanitizers
         -fsanitize=address,undefined
         -fno-omit-frame-pointer
@@ -21,5 +22,4 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     )
 endif()
 
-add_subdirectory(source)
-
+add_executable(main main.cpp)

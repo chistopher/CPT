@@ -8,6 +8,7 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         -Wall -Wextra -Wshadow -Wfloat-equal -Wconversion
         -Wno-sign-conversion # we often compare int to size_t
         -Wvla # warn for variable length arrays
+        -Werror=uninitialized # turn this warning into error
         # sanitizers
         -fsanitize=address,undefined
         -fno-omit-frame-pointer
